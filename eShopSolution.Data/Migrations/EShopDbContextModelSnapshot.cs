@@ -180,7 +180,7 @@ namespace eShopSolution.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles", (string)null);
-                    
+
                     b.HasData(
                         new
                         {
@@ -190,7 +190,6 @@ namespace eShopSolution.Data.Migrations
                             Name = "admin",
                             NormalizedName = "admin"
                         });
-
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.AppUser", b =>
@@ -529,8 +528,8 @@ namespace eShopSolution.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 30, 22, 47, 44, 934, DateTimeKind.Local).AddTicks(5299));
-                        
+                        .HasDefaultValue(new DateTime(2023, 3, 27, 11, 27, 37, 596, DateTimeKind.Local).AddTicks(708));
+
                     b.Property<string>("ShipAddress")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -621,7 +620,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 3, 30, 22, 47, 44, 940, DateTimeKind.Local).AddTicks(7789),
+                            DateCreated = new DateTime(2023, 3, 27, 11, 27, 37, 598, DateTimeKind.Local).AddTicks(5625),
                             OriginalPrice = 100000.0,
                             Price = 200000.0,
                             Stock = 0,
@@ -639,8 +638,7 @@ namespace eShopSolution.Data.Migrations
 
                     b.Property<string>("Caption")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -650,8 +648,7 @@ namespace eShopSolution.Data.Migrations
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
@@ -666,7 +663,7 @@ namespace eShopSolution.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.ProductInCategory", b =>
