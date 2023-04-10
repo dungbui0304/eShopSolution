@@ -185,7 +185,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "e1bd450e-88a5-4a36-afbf-3380dc5ae3c4",
+                            ConcurrencyStamp = "e5003e4c-1d4c-4078-a68e-c7c8bca29302",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -263,7 +263,7 @@ namespace eShopSolution.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8ca3c621-98a8-4f5c-bdb2-9a3c5c6df092",
+                            ConcurrencyStamp = "f51b6d2f-63f4-4b41-8cc4-4bce60c63ac1",
                             Dob = new DateTime(2020, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "dungbt17@fpt.com.vn",
                             EmailConfirmed = true,
@@ -272,7 +272,7 @@ namespace eShopSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "dungbt17@fpt.com.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE7kr7FfBpE3K9MvRkl43cpPrShFPSdyYYuObSgXWOrjQrC0/L+TPUdXip/svoiV0Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM2Vk0HGCCCJh9kyukXf6s03wOQYpE8w0N3KERMMK/fmQBfSvmoQbVTgOf1QdgMXIg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -288,7 +288,7 @@ namespace eShopSolution.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid?>("AppUserId")
+                    b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateCreated")
@@ -523,14 +523,13 @@ namespace eShopSolution.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid?>("AppUserId")
+                    b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 30, 22, 47, 44, 934, DateTimeKind.Local).AddTicks(5299));
-                        
+                        .HasDefaultValue(new DateTime(2023, 4, 10, 10, 57, 52, 546, DateTimeKind.Local).AddTicks(421));
                     b.Property<string>("ShipAddress")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -621,7 +620,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 3, 30, 22, 47, 44, 940, DateTimeKind.Local).AddTicks(7789),
+                            DateCreated = new DateTime(2023, 4, 10, 10, 57, 52, 549, DateTimeKind.Local).AddTicks(7680),
                             OriginalPrice = 100000.0,
                             Price = 200000.0,
                             Stock = 0,
@@ -820,7 +819,7 @@ namespace eShopSolution.Data.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<Guid?>("AppUserId")
+                    b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExternalTransactionId")
@@ -848,6 +847,9 @@ namespace eShopSolution.Data.Migrations
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
@@ -857,15 +859,19 @@ namespace eShopSolution.Data.Migrations
 
             modelBuilder.Entity("eShopSolution.Data.Entities.Cart", b =>
                 {
-                    b.HasOne("eShopSolution.Data.Entities.AppUser", null)
+                    b.HasOne("eShopSolution.Data.Entities.AppUser", "AppUser")
                         .WithMany("Carts")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("eShopSolution.Data.Entities.Product", "Product")
                         .WithMany("Carts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Product");
                 });
@@ -891,9 +897,13 @@ namespace eShopSolution.Data.Migrations
 
             modelBuilder.Entity("eShopSolution.Data.Entities.Order", b =>
                 {
-                    b.HasOne("eShopSolution.Data.Entities.AppUser", null)
+                    b.HasOne("eShopSolution.Data.Entities.AppUser", "AppUser")
                         .WithMany("Orders")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.OrderDetail", b =>
@@ -966,9 +976,13 @@ namespace eShopSolution.Data.Migrations
 
             modelBuilder.Entity("eShopSolution.Data.Entities.Transaction", b =>
                 {
-                    b.HasOne("eShopSolution.Data.Entities.AppUser", null)
+                    b.HasOne("eShopSolution.Data.Entities.AppUser", "AppUser")
                         .WithMany("Transactions")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.AppUser", b =>
