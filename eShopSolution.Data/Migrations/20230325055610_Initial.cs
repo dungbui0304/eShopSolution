@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -284,7 +283,7 @@ namespace eShopSolution.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Details = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    SeoDesciption = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SeoDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SeoTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SeoAlias = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     LanguageId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false)

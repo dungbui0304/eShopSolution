@@ -180,7 +180,7 @@ namespace eShopSolution.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles", (string)null);
-
+                    
                     b.HasData(
                         new
                         {
@@ -190,6 +190,7 @@ namespace eShopSolution.Data.Migrations
                             Name = "admin",
                             NormalizedName = "admin"
                         });
+
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.AppUser", b =>
@@ -529,7 +530,6 @@ namespace eShopSolution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValue(new DateTime(2023, 4, 10, 10, 57, 52, 546, DateTimeKind.Local).AddTicks(421));
-
                     b.Property<string>("ShipAddress")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -638,7 +638,8 @@ namespace eShopSolution.Data.Migrations
 
                     b.Property<string>("Caption")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -648,7 +649,8 @@ namespace eShopSolution.Data.Migrations
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
@@ -663,7 +665,7 @@ namespace eShopSolution.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImage");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.ProductInCategory", b =>
