@@ -21,13 +21,13 @@ namespace eShopSolution.Application.System
             _signInManager = signInManager;
             _roleManager = roleManager;
             _config = config;
-        }
+        }                                                                                                                               
         public async Task<string> Authenticate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null) return null;
 
-            var result = await _signInManager.PasswordSignInAsync(user, request.Passwrod, request.RememberMe, true);
+            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded) return null;
 
             var roles = await _userManager.GetRolesAsync(user);
