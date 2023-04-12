@@ -14,11 +14,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.Data", "eShop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.Application", "eShopSolution.Application\eShopSolution.Application.csproj", "{690B9829-4CC5-471A-9A5D-080524A009CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Utilities", "eShop.Utilities\eShop.Utilities.csproj", "{78AD6C64-4E64-4EE2-9DBC-7D0A3E0118C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.Utilities", "eShop.Utilities\eShopSolution.Utilities.csproj", "{78AD6C64-4E64-4EE2-9DBC-7D0A3E0118C4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.ViewModels", "eShopSolution.ViewModels\eShopSolution.ViewModels.csproj", "{1E62120C-233D-4442-BFD7-213F2A5B9146}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.BackendApi", "eShopSolution.BackendApi\eShopSolution.BackendApi.csproj", "{9C34EA70-42EC-4210-9C2D-F0D31F469233}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.BackendApi", "eShopSolution.BackendApi\eShopSolution.BackendApi.csproj", "{9C34EA70-42EC-4210-9C2D-F0D31F469233}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
