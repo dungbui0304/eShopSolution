@@ -1,7 +1,36 @@
+﻿using FluentValidation.AspNetCore;
+using eShopSolution.ViewModels.System.Users;
+using eShopSolution.AdminApp.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Thêm razorpage để kiểm tra xem môi trường đang chạy là gì, để có thể biên dịch và tải lại khi mã nguồn thay đổi
+IMvcBuilder builderRazor = builder.Services.AddRazorPages();
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+#if DEBUG
+if (environment == Environments.Development)
+{
+    builderRazor.AddRazorRuntimeCompilation();
+}
+#endif
+
+builder.Services.AddHttpClient();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/User/Login/";
+        options.AccessDeniedPath = "/User/Forbidden/";
+    });
+
+builder.Services.AddControllersWithViews()
+                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+
+builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 
 var app = builder.Build();
 
@@ -15,6 +44,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseAuthentication();
 
 app.UseRouting();
 
