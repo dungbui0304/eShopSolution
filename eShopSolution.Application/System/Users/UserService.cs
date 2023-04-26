@@ -48,8 +48,7 @@ namespace eShopSolution.Application.System
                 _config["Tokens:Issuer"],
                 claims,
                 expires: DateTime.Now.AddHours(3),
-                signingCredentials: creds
-                );
+                signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
@@ -72,7 +71,7 @@ namespace eShopSolution.Application.System
                     Email = x.Email,
                     UserName = x.UserName,
                     FirstName = x.FirstName,
-                    Id = x.Id,
+                    PhoneNumber = x.PhoneNumber,
                     LastName = x.LastName
                 }).ToListAsync();
 
